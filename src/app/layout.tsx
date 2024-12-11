@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Nunito, Syne } from "next/font/google";
+import FinalClerkConvexProvider from "@/components/final-clerk-convex-provider";
 
 const nunito = Nunito({
   subsets: ["latin"],
@@ -23,10 +24,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${nunito.className} ${syne.variable} antialiased`}>
-        {children}
-      </body>
-    </html>
+    <FinalClerkConvexProvider>
+      <html lang="en">
+        <body className={`${nunito.className} ${syne.variable} antialiased`}>
+          {children}
+        </body>
+      </html>
+    </FinalClerkConvexProvider>
   );
 }

@@ -1,0 +1,146 @@
+[
+  {
+    "name": "bathroom-remodel",
+    "label": "Bathroom remodel",
+    "type": "GC",
+    "description": "Keep peeing",
+    "avg_price": 65000,
+    "image_url": "https://nvkitchenandbath.com/wp-content/uploads/2022/03/bathroom-remodel-1-scaled-600x400.jpg",
+    "is_lot_upgrade": false
+  },
+  {
+    "name": "attic-and-crawl-space",
+    "label": "Attic & Crawl Space",
+    "type": "EE",
+    "description": "Insulation, insulation, insulaiton. Also radiant barrier, but mostly insulation",
+    "avg_price": 5200,
+    "image_url": "https://www.bobvila.com/wp-content/uploads/2020/01/Blown_in_Insulation.jpg",
+    "is_lot_upgrade": false
+  },
+  {
+    "name": "flooring",
+    "label": "Flooring",
+    "type": "GC",
+    "description": "Damages not in my house",
+    "avg_price": 23000,
+    "image_url": "https://media.llflooring.com/image/upload/w_1000,h_1000,f_auto,q_auto,c_pad,c_fit/10053543-h_fkxr9c.jpg",
+    "is_lot_upgrade": false
+  },
+  {
+    "name": "addition",
+    "label": "Addition",
+    "type": "GC",
+    "description": "Woh there reflex",
+    "avg_price": 200000,
+    "image_url": "https://images.ctfassets.net/79nimht05j33/6lOnGRf7aWzOYtcOC5jKOc/c0cbc1127bf87d5ef4ca6c86a0fe9623/homeadditions.jpg?w=1500&h=1000&fl=progressive&q=70&fm=jpg&bg=transparent",
+    "is_lot_upgrade": true
+  },
+  {
+    "name": "hvac",
+    "label": "HVAC",
+    "type": "EE",
+    "description": "HVAC keeps you cool",
+    "avg_price": 27000,
+    "image_url": "https://www.townsendtotalenergy.com/wp-content/uploads/2023/06/air-conditioner-condenser-unit-depicting-outside-ac-unit-stopped-working.jpg",
+    "is_lot_upgrade": false
+  },
+  {
+    "name": "adu",
+    "label": "ADU",
+    "type": "GC",
+    "description": "BIG BIG upgrades",
+    "avg_price": 240000,
+    "image_url": "https://superioradus.com/wp-content/uploads/2020/10/5-1024x576.png",
+    "is_lot_upgrade": true
+  },
+  {
+    "name": "pool",
+    "label": "Pool",
+    "type": "GC",
+    "description": null,
+    "avg_price": 125000,
+    "image_url": "https://irp.cdn-website.com/1606e9b3/dms3rep/multi/swimming-pool-builder-modern-pool-night-lrg-pools-1+copy.webp",
+    "is_lot_upgrade": true
+  },
+  {
+    "name": "dryscaping",
+    "label": "Dryscaping",
+    "type": "EE",
+    "description": "Looking nice in the sun",
+    "avg_price": 30200,
+    "image_url": "https://assets-global.website-files.com/63a02e61e7ffb565c30bcfc7/659cd16736c2b44e259d4a68_modern%20landscape%20design.webp",
+    "is_lot_upgrade": true
+  },
+  {
+    "name": "solar",
+    "label": "Solar",
+    "type": "EE",
+    "description": "Cool solar system",
+    "avg_price": 35000,
+    "image_url": "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
+    "is_lot_upgrade": false
+  },
+  {
+    "name": "stucco-and-siding",
+    "label": "Stucco & Siding",
+    "type": "EE",
+    "description": "Stucoo cool life hell yeah mutha",
+    "avg_price": 28500,
+    "image_url": "https://contentgrid.homedepot-static.com/hdus/en_US/DTCCOMNEW/Articles/painting-the-exterior-of-our-house-with-the-projectcolor-app-hero.jpg",
+    "is_lot_upgrade": false
+  },
+  {
+    "name": "roof",
+    "label": "Roof",
+    "type": "EE",
+    "description": "Cool roof, replace that shit",
+    "avg_price": 25000,
+    "image_url": "https://s42814.pcdn.co/wp-content/uploads/2020/01/Roofing_iStock-934626558.0-1-scaled.jpg.optimal.jpg",
+    "is_lot_upgrade": false
+  },
+  {
+    "name": "plumbing",
+    "label": "Plumbing",
+    "type": "EE",
+    "description": "Plumb that shiet",
+    "avg_price": 17000,
+    "image_url": "https://i.pinimg.com/564x/19/d3/b2/19d3b2cbc16da1d108434b89f1572c38.jpg",
+    "is_lot_upgrade": false
+  },
+  {
+    "name": "kitchen-remodel",
+    "label": "Kitchen remodel",
+    "type": "GC",
+    "description": "Remodel remodel remodel that fuck",
+    "avg_price": 69000,
+    "image_url": "https://www.mskdesignbuild.com/wp-content/uploads/2019/10/MSK-Joshi-Web-1.jpg",
+    "is_lot_upgrade": false
+  },
+  {
+    "name": "windows-and-doors",
+    "label": "Windows & Doors",
+    "type": "EE",
+    "description": "Windows are awesome!",
+    "avg_price": 23000,
+    "image_url": "https://bearwindows.com/wp-content/uploads/2020/05/vinyl-french1.jpg",
+    "is_lot_upgrade": false
+  },
+  {
+    "name": "interior-drywall-and-paint",
+    "label": "Interior drywall & paint",
+    "type": "GC",
+    "description": "Exterior paint not as nice",
+    "avg_price": 53200,
+    "image_url": "https://residential.keim-usa.com/wp-content/uploads/2021/09/Web-Development_Interior-Mineral-Paint-Product-Page-Image-1-Color-20303-scaled.jpg",
+    "is_lot_upgrade": false
+  },
+  {
+    "name": "exterior-upgrades",
+    "label": "Exterior Upgrades",
+    "type": "GC",
+    "description": "Let's upgrade some shit",
+    "avg_price": 25000,
+    "image_url": "https://www.outdoorkitchencreations.net/wp-content/uploads/2022/11/kit-3.jpg",
+    "is_lot_upgrade": true
+  }
+]
