@@ -12,11 +12,12 @@ export default defineSchema({
     image_url: v.string(),
   }),
   solutions: defineTable({
+    upgrade_id: v.optional(v.id("upgrades")),
     name: v.string(),
     label: v.string(),
-    description: v.string(),
-    upgrade_id: v.id("upgrades"),
+    description: v.union(v.string(), v.null()),
     image_url: v.string(),
+    scope_of_work_init: v.union(v.string(), v.null()),
   }),
   projects: defineTable({}),
   customers: defineTable({
