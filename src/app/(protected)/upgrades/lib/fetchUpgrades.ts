@@ -1,6 +1,10 @@
 import fetchUpgradesMongo from "./fetchUpgradesMongo";
 
-export default async function fetchUpgrades() {
+export default async function fetchUpgrades({
+  seconds = 5,
+}: {
+  seconds?: number;
+}) {
   const cache = localStorage.getItem("upgrades");
   const cachedUpgrades = cache ? JSON.parse(cache) : null;
 
@@ -13,7 +17,10 @@ export default async function fetchUpgrades() {
     console.log("fetched upgrades from server...");
     localStorage.setItem(
       "upgrades",
-      JSON.stringify({ expiry: new Date().getTime() + 5 * 1000, upgrades })
+      JSON.stringify({
+        expiry: new Date().getTime() + seconds * 1000,
+        upgrades,
+      })
     );
     return upgrades;
   }

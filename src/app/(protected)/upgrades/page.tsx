@@ -9,7 +9,7 @@ export default function UpgradesPage() {
   const [upgrades, setUpgrades] = useState<Upgrade[]>([]);
 
   useEffect(() => {
-    fetchUpgrades().then((upgrades) => setUpgrades(upgrades));
+    fetchUpgrades({ seconds: 20 }).then((upgrades) => setUpgrades(upgrades));
   }, []);
 
   if (!upgrades) {

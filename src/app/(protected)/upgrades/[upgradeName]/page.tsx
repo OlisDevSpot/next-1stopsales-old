@@ -19,7 +19,7 @@ export default function UpgradePage({
   const { upgradeName } = params;
 
   useEffect(() => {
-    fetchSolutions(upgradeName).then((data) => {
+    fetchSolutions(upgradeName, { seconds: 20 }).then((data) => {
       console.log({ data });
       setUpgrade(data.upgrade);
       setSolutions(data.solutions);
@@ -29,6 +29,10 @@ export default function UpgradePage({
   // const solutions = useQuery(api.solutions.getSolutionsOfUpgrade, {
   //   upgradeName,
   // });
+
+  const handleClick = (solutionName: string) => {
+    router.push(`/upgrades/${upgradeName}/${solutionName}`);
+  };
 
   return (
     <div className="w-full h-full flex flex-col">
@@ -43,7 +47,11 @@ export default function UpgradePage({
       <div className="grid grid-cols-3 gap-4 flex-grow">
         {solutions?.map((solution) => {
           return (
-            <SolutionCard solution={solution} key={String(solution._id)} />
+            <SolutionCard
+              solution={solution}
+              key={String(solution._id)}
+              onClick={() => handleClick(solution.name)}
+            />
           );
         })}
       </div>

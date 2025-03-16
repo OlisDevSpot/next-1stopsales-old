@@ -1,6 +1,9 @@
 import fetchSolutionsMongo from "./fetchSolutionsMongo";
 
-export default async function fetchSolutions(upgradeName: string) {
+export default async function fetchSolutions(
+  upgradeName: string,
+  { seconds = 5 }: { seconds?: number }
+) {
   const cache = localStorage.getItem(`${upgradeName}-solutions`);
   const cachedSolutions = cache ? JSON.parse(cache) : null;
 
@@ -16,7 +19,7 @@ export default async function fetchSolutions(upgradeName: string) {
     console.log("fetched solutions from server...");
     localStorage.setItem(
       `${upgradeName}-solutions`,
-      JSON.stringify({ expiry: new Date().getTime() + 5 * 1000, data })
+      JSON.stringify({ expiry: new Date().getTime() + seconds * 1000, data })
     );
     return data;
   }
