@@ -12,3 +12,12 @@ export function getCategoryDetail(
 export function getVariables(category: Upgrade | Solution) {
   return category.variables;
 }
+
+export function generateVariables(solution: Solution) {
+    return [
+      ...getVariables(solution).map((v) => ({
+        ...v,
+        value: v.defaultValue || 0,
+      })),
+    ];
+  }

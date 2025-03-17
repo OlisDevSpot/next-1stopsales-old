@@ -23,11 +23,8 @@ export class Upgrade {
   }
 
   get solutions() {
-    const solutionsOfUpgrade = solutionsMetadata.find(
-      (solutionsOfUpgrade) =>
-        solutionsOfUpgrade.upgradeAccessor === this._accessor
-    );
+    const solutionsOfUpgrade = solutionsMetadata[this._accessor];
     if (!solutionsOfUpgrade) throw new Error("Upgrade not found");
-    return solutionsOfUpgrade.solutions;
+    return solutionsOfUpgrade;
   }
 }

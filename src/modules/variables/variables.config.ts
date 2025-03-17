@@ -1,16 +1,7 @@
 import { AllUpgrades } from "../upgrades/types";
-import { Variable } from "./types";
+import { AllGeneralVariablesKeys, Variables } from "./types";
 
-type GeneralVariables = {
-  home: Variable[];
-  lot: Variable[];
-};
-
-type UpgradeVariables = {
-  [key in AllUpgrades]: Variable[];
-};
-
-export const generalVariables: GeneralVariables = {
+export const generalVariables: Variables<AllGeneralVariablesKeys> = {
   home: [
     {
       accessor: "numStories",
@@ -36,14 +27,20 @@ export const generalVariables: GeneralVariables = {
   ],
 };
 
-export const upgradeVariables: UpgradeVariables = {
+export const upgradeVariables: Variables<AllUpgrades> = {
   solar: [
     {
       accessor: "numPanels",
       label: "Number of panels",
       type: "number",
+      defaultValue: 5,
     },
-    { accessor: "wattsPerPanel", label: "Watts per panel", type: "number" },
+    {
+      accessor: "wattsPerPanel",
+      label: "Watts per panel",
+      type: "number",
+      defaultValue: 390,
+    },
     {
       accessor: "numBatteries",
       label: "Number of batteries",
@@ -56,6 +53,7 @@ export const upgradeVariables: UpgradeVariables = {
       label: "kWh per battery",
       type: "select",
       options: [5, 10],
+      defaultValue: 5,
     },
     {
       accessor: "inverterType",
@@ -167,6 +165,12 @@ export const upgradeVariables: UpgradeVariables = {
       type: "select",
       options: [1, 2, 3, 4, 5, 6, 7, 8],
       defaultValue: 1,
+    },
+    {
+      accessor: "replaceDucts",
+      label: "Duct replacement",
+      type: "checkbox",
+      defaultValue: "false",
     },
   ],
   dryscaping: [

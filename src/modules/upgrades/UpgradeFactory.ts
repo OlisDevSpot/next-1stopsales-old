@@ -12,3 +12,7 @@ export class UpgradeFactory {
     return new Upgrade(upgradeMetadata);
   }
 }
+
+export function createUpgrade(accessor: AllUpgrades) {
+  return UpgradeFactory.createUpgrade(accessor);
+}

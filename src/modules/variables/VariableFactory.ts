@@ -20,12 +20,9 @@ export class VariableFactory {
       const variablesOfUpgrade =
         upgradeVariables[this.upgradeAccessor as keyof typeof upgradeVariables];
       const variablesOfSolution =
-        solutionsMetadata
-          .find((ug) =>
-            ug.solutions.find((s) => s.accessor === this.solutionAccessor)
-          )
-          ?.solutions.find((s) => s.accessor === this.solutionAccessor)
-          ?.variables || [];
+        solutionsMetadata[this.upgradeAccessor]!.find(
+          (s) => s.accessor === this.solutionAccessor
+        )?.variables || [];
       variablesOfSolution.forEach((vos) => {
         variablesOfUpgrade.forEach((vou) => {
           if (vou.accessor === vos) {

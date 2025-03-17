@@ -20,7 +20,6 @@ export default function UpgradePage({
 
   useEffect(() => {
     fetchSolutions(upgradeName, { seconds: 20 }).then((data) => {
-      console.log({ data });
       setUpgrade(data.upgrade);
       setSolutions(data.solutions);
     });
