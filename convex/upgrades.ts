@@ -1,7 +1,7 @@
 import { query } from "./_generated/server";
 import { v } from "convex/values";
 
-export const getAllUpgrades = query({
+export const getAllUpgradeKeys = query({
   args: {},
   handler: async (ctx) => {
     const upgrades = await ctx.db.query("upgrades").collect();

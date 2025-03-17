@@ -1,12 +1,12 @@
 import { solutionsMetadata } from "../solutions/solutions.config";
-import { AllUpgrades } from "../upgrades/types";
+import { AllUpgradeKeys } from "../upgrades/types";
 import { upgradesMetadata } from "../upgrades/upgrades.config";
 import { Variable } from "./types";
 import { pricesVariables, upgradeVariables } from "./variables.config";
 
 export class VariableFactory {
   constructor(
-    private upgradeAccessor: AllUpgrades,
+    private upgradeAccessor: AllUpgradeKeys,
     private solutionAccessor?: string
   ) {}
   get variables(): Variable[] {

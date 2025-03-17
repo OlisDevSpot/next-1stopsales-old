@@ -1,4 +1,4 @@
-import { AllUpgrades } from "../upgrades/types";
+import { AllUpgradeKeys } from "../upgrades/types";
 import { AllGeneralVariablesKeys, Variables } from "./types";
 
 export const generalVariables: Variables<AllGeneralVariablesKeys> = {
@@ -27,7 +27,7 @@ export const generalVariables: Variables<AllGeneralVariablesKeys> = {
   ],
 };
 
-export const upgradeVariables: Variables<AllUpgrades> = {
+export const upgradeVariables: Variables<AllUpgradeKeys> = {
   solar: [
     {
       accessor: "numPanels",

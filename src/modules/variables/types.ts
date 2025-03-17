@@ -1,4 +1,4 @@
-import { AllUpgrades } from "../upgrades/types";
+import { AllUpgradeKeys } from "../upgrades/types";
 import {
   generalVariables,
   upgradeVariables,
@@ -34,7 +34,7 @@ export interface ChosenVariable extends Variable {
 
 // Prices (OG)
 export type Prices = {
-  [key in AllUpgrades]: {
+  [key in AllUpgradeKeys]: {
     [key: string]: number;
   };
 };
@@ -46,5 +46,5 @@ export interface PriceVar {
 }
 
 export type PricesStandardized = {
-  [key in AllUpgrades]: PriceVar[];
+  [key in AllUpgradeKeys]: PriceVar[];
 };

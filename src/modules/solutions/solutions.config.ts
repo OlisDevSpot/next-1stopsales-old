@@ -1,5 +1,6 @@
 import { SolutionsMetadata } from "./types";
 import { pricesVariables } from "../variables/variables.config";
+import { AllUpgradeKeys } from "../upgrades/types";
 
 export const solutionsMetadata: SolutionsMetadata = {
   solar: [
@@ -208,6 +209,7 @@ export const solutionsMetadata: SolutionsMetadata = {
       variables: ["systemTonnage"],
       generalVariables: ["numStories"],
       costFormula({ systemTonnage = 3 }) {
+        console.log({ systemTonnage });
         return 0;
       },
     },
@@ -220,6 +222,7 @@ export const solutionsMetadata: SolutionsMetadata = {
       variables: ["systemTonnage"],
       generalVariables: ["numStories"],
       costFormula({ systemTonnage = 3 }) {
+        console.log({ systemTonnage });
         return 0;
       },
     },
@@ -232,11 +235,21 @@ export const solutionsMetadata: SolutionsMetadata = {
       variables: ["numMiniSplits"],
       generalVariables: ["numStories"],
       costFormula({ systemTonnage = 3 }) {
+        console.log({ systemTonnage });
         return 0;
       },
     },
   ],
 };
+
+export const solutionsUpgradesMap: Record<string, AllUpgradeKeys> = {};
+
+Object.entries(solutionsMetadata).forEach(([key, value]) => {
+  value.forEach((solution) => {
+    solutionsUpgradesMap[solution.accessor] = key as AllUpgradeKeys;
+  });
+});
+
 // {
 //   upgradeAccessor: "dryscaping",
 //   solutions: [

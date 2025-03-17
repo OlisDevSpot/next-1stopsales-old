@@ -8,7 +8,7 @@ import {
   getVariables,
 } from "@/modules/helper-functions/displayHelpers";
 import { type Upgrade } from "@/modules/upgrades/Upgrade";
-import { type AllUpgrades } from "@/modules/upgrades/types";
+import { type AllUpgradeKeys } from "@/modules/upgrades/types";
 import { type Solution } from "@/modules/solutions/Solution";
 import { type VariableWithValue } from "@/modules/variables/types";
 
@@ -21,10 +21,7 @@ import { CategoryCard } from "./_components/CategoryCard";
 import { Output } from "./_components/Output";
 
 const default_upgrade = createUpgrade("solar");
-const default_solution = createSolution(
-  default_upgrade.info.accessor,
-  default_upgrade.solutions[0].accessor
-);
+const default_solution = createSolution(default_upgrade.solutions[0].accessor);
 const default_variables = [
   ...getVariables(default_solution).map((v) => ({
     ...v,
@@ -44,12 +41,9 @@ const TestPage = () => {
     setVariables(generateVariables(selectedSolution));
   }, [selectedSolution]);
 
-  function updateUpgrade(upgrade: AllUpgrades) {
+  function updateUpgrade(upgrade: AllUpgradeKeys) {
     const newUpgrade = createUpgrade(upgrade);
-    const newSolution = createSolution(
-      newUpgrade.info.accessor,
-      newUpgrade.solutions[0].accessor
-    );
+    const newSolution = createSolution(newUpgrade.solutions[0].accessor);
     const newVariables = generateVariables(newSolution);
     setSelectedUpgrade(newUpgrade);
     setSelectedSolution(newSolution);
@@ -62,7 +56,7 @@ const TestPage = () => {
         <select
           value={getCategoryDetail(selectedUpgrade.info, "accessor")}
           onChange={(e) => {
-            updateUpgrade(e.target.value as AllUpgrades);
+            updateUpgrade(e.target.value as AllUpgradeKeys);
           }}
         >
           {upgradesMetadata.map((upgrade) => (
@@ -76,7 +70,6 @@ const TestPage = () => {
           onChange={(e) => {
             setSelectedSolution(
               createSolution(
-                selectedUpgrade.info.accessor,
                 selectedUpgrade.solutions.find(
                   (s) => s.accessor === e.target.value
                 )!.accessor

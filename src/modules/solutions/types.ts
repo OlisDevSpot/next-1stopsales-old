@@ -1,5 +1,5 @@
 import { Metadata } from "@/types/global";
-import { AllUpgrades } from "../upgrades/types";
+import { AllUpgradeKeys } from "../upgrades/types";
 import {
   GeneralVariableAccessors,
   UpgradeVariablesAccessors,
@@ -9,7 +9,7 @@ export type CostFormulaParams<T> = {
   [key in keyof T]?: number;
 };
 
-type CostFormula = (params: { [key: string]: string | number }) => number;
+type CostFormula = (params: { [key: string]: number }) => number;
 
 export interface SolutionMetadata extends Metadata {
   variables: UpgradeVariablesAccessors[];
@@ -17,6 +17,6 @@ export interface SolutionMetadata extends Metadata {
   costFormula: CostFormula;
 }
 
-export type SolutionsMetadata = {
-  [key in AllUpgrades]?: SolutionMetadata[];
-};
+export type SolutionsMetadata = Partial<
+  Record<AllUpgradeKeys, SolutionMetadata[]>
+>;

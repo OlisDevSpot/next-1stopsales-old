@@ -1,17 +1,9 @@
 import { Metadata } from "@/types/global";
+import { upgradesMetadata } from "./upgrades.config";
 
-export type AllUpgrades =
-  | "solar"
-  | "roof"
-  | "insulation"
-  | "windows"
-  | "dryscaping"
-  | "hvac"
-  | "exteriorPaint"
-  | "interiorPaint"
-  | "electricals";
+export type AllUpgradeKeys = (typeof upgradesMetadata)[number]["accessor"];
 
-export interface UpgradeMetadata extends Metadata<AllUpgrades> {
+export interface UpgradeMetadata extends Metadata<AllUpgradeKeys> {
   extent: "home" | "lot";
   type: "GC" | "EE";
 }

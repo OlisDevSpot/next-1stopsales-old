@@ -1,6 +1,4 @@
-import { UpgradeMetadata } from "./types";
-
-export const upgradesMetadata: UpgradeMetadata[] = [
+export const upgradesMetadata = [
   {
     accessor: "solar",
     label: "Solar",

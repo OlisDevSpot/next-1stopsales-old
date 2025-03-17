@@ -1,9 +1,9 @@
-import { AllUpgrades } from "./types";
+import { AllUpgradeKeys } from "./types";
 import { Upgrade } from "./Upgrade";
 import { upgradesMetadata } from "./upgrades.config";
 
 export class UpgradeFactory {
-  static createUpgrade(accessor: AllUpgrades): Upgrade {
+  static createUpgrade(accessor: AllUpgradeKeys): Upgrade {
     if (!accessor) throw new Error("Please provide an upgrade accessor");
     const upgradeMetadata = upgradesMetadata.find(
       (u) => u.accessor === accessor
@@ -13,6 +13,6 @@ export class UpgradeFactory {
   }
 }
 
-export function createUpgrade(accessor: AllUpgrades) {
+export function createUpgrade(accessor: AllUpgradeKeys) {
   return UpgradeFactory.createUpgrade(accessor);
 }
