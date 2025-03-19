@@ -5,10 +5,12 @@ import { Variable } from "./types";
 import { pricesVariables, upgradeVariables } from "./variables.config";
 
 export class VariableFactory {
+  private _variables: Variable[] = [];
   constructor(
     private upgradeAccessor: AllUpgradeKeys,
     private solutionAccessor?: string
   ) {}
+
   get variables(): Variable[] {
     let variables: Variable[] = [];
     if (!this.solutionAccessor) {

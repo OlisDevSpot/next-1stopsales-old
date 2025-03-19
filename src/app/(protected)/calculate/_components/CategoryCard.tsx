@@ -31,10 +31,10 @@ export const CategoryCard = ({
       <div className="flex flex-col border w-full rounded-lg p-4">
         <h3 className="leading-relaxed text-xl">
           {category instanceof Upgrade ? "Upgrade" : "Solution"}:{" "}
-          {getCategoryDetail(category.info)}
+          {getCategoryDetail(category.metadata)}
         </h3>
         <p className="text-neutral-700">
-          {getCategoryDetail(category.info, "description")}
+          {getCategoryDetail(category.metadata, "description")}
         </p>
       </div>
       <div className="flex flex-col border w-full rounded-lg p-4 gap-4">

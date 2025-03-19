@@ -54,7 +54,7 @@ const TestPage = () => {
     <div className="text-base w-full space-y-4">
       <div className="flex gap-2">
         <select
-          value={getCategoryDetail(selectedUpgrade.info, "accessor")}
+          value={getCategoryDetail(selectedUpgrade.metadata, "accessor")}
           onChange={(e) => {
             updateUpgrade(e.target.value as AllUpgradeKeys);
           }}
@@ -66,7 +66,7 @@ const TestPage = () => {
           ))}
         </select>
         <select
-          value={getCategoryDetail(selectedSolution.info, "accessor")}
+          value={getCategoryDetail(selectedSolution.metadata, "accessor")}
           onChange={(e) => {
             setSelectedSolution(
               createSolution(
@@ -77,11 +77,13 @@ const TestPage = () => {
             );
           }}
         >
-          {solutionsMetadata[selectedUpgrade.info.accessor]!.map((solution) => (
-            <option key={solution.accessor} value={solution.accessor}>
-              {solution.label}
-            </option>
-          ))}
+          {solutionsMetadata[selectedUpgrade.metadata.accessor]!.map(
+            (solution) => (
+              <option key={solution.accessor} value={solution.accessor}>
+                {solution.label}
+              </option>
+            )
+          )}
         </select>
       </div>
       <div className="flex gap-4 w-full">

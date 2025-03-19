@@ -11,6 +11,6 @@ export interface Metadata<T extends string = string> {
 export interface BaseConstructionCategory<T extends string = string> {
   _accessor: T;
   variablesProvider: VariableFactory;
-  info: Metadata<T>;
+  metadata: Metadata<T>;
   variables: Variable[];
 }
