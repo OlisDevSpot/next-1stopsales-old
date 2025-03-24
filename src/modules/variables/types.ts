@@ -22,8 +22,8 @@ export type Variables<T extends string> = {
   [key in T]: Variable[];
 };
 
-export type UpgradeVariablesAccessors =
-  (typeof upgradeVariables)[keyof typeof upgradeVariables][number]["accessor"];
+export type UpgradeVariablesAccessors<T extends AllUpgradeKeys> =
+  (typeof upgradeVariables)[T][number]["accessor"];
 
 export type GeneralVariableAccessors =
   (typeof generalVariables)[keyof typeof generalVariables][number]["accessor"];

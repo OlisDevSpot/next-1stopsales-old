@@ -37,7 +37,10 @@ export const CategoryCard = ({
           {getCategoryDetail(category.metadata, "description")}
         </p>
       </div>
-      <div className="flex flex-col border w-full rounded-lg p-4 gap-4">
+      <form
+        className="flex flex-col border w-full rounded-lg p-4 gap-4"
+        onSubmit={(e) => e.preventDefault()}
+      >
         <h4 className="text-lg font-semibold leading-loose">Variables</h4>
         <ul className="flex gap-2 flex-wrap">
           {getVariables(category).map((v) => {
@@ -60,7 +63,7 @@ export const CategoryCard = ({
             Submit
           </button>
         )}
-      </div>
+      </form>
     </div>
   );
 };

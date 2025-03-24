@@ -9,14 +9,15 @@ export type CostFormulaParams<T> = {
   [key in keyof T]?: number;
 };
 
-type CostFormula = (params: { [key: string]: number }) => number;
-
-export interface SolutionMetadata extends Metadata {
-  variables: UpgradeVariablesAccessors[];
+export interface SolutionMetadata<UpgradeAccessor extends AllUpgradeKeys>
+  extends Metadata {
+  variables: UpgradeVariablesAccessors<UpgradeAccessor>[];
   generalVariables: GeneralVariableAccessors[];
-  costFormula: CostFormula;
+  costFormula: (params: {
+    [key in UpgradeVariablesAccessors<UpgradeAccessor>]: number;
+  }) => number;
 }
 
-export type SolutionsMetadata = Partial<
-  Record<AllUpgradeKeys, SolutionMetadata[]>
->;
+export type SolutionsMetadata = {
+  [Key in AllUpgradeKeys]: SolutionMetadata<Key>[];
+};

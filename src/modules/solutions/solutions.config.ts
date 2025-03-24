@@ -2,6 +2,11 @@ import { SolutionsMetadata } from "./types";
 import { pricesVariables } from "../variables/variables.config";
 import { AllUpgradeKeys } from "../upgrades/types";
 
+const currentProjectInfo = {
+  roofType: "shingle",
+  numStories: 1,
+};
+
 export const solutionsMetadata: SolutionsMetadata = {
   solar: [
     {
@@ -54,16 +59,10 @@ export const solutionsMetadata: SolutionsMetadata = {
         "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
       variables: ["numFlatBSQ", "numPitchedBSQ", "numLayers"],
       generalVariables: ["numStories", "existingRoofType"],
-      costFormula({
-        numFlatBSQ = 0,
-        numPitchedBSQ = 0,
-        numLayers = 1,
-        numStories = 1,
-        existingRoofType = "shingles",
-      }) {
+      costFormula({ numFlatBSQ = 0, numPitchedBSQ = 0, numLayers = 1 }) {
         const totalBSQ = numFlatBSQ + numPitchedBSQ;
         const pitchedCost =
-          (existingRoofType === "shingles"
+          (currentProjectInfo.roofType === "shingle"
             ? pricesVariables.roof.BSQTearOffShingles
             : pricesVariables.roof.BSQTearOffTile) * numPitchedBSQ;
         const flatCost = numFlatBSQ * pricesVariables.roof.BSQTearOffFlat;
@@ -72,7 +71,7 @@ export const solutionsMetadata: SolutionsMetadata = {
           pricesVariables.roof.dollarPerAdditionalLayer *
           numPitchedBSQ;
         const costAdditionalStories =
-          (numStories - 1) *
+          (currentProjectInfo.numStories - 1) *
           pricesVariables.roof.dollarPerAdditionalStory *
           totalBSQ;
         return (
@@ -88,12 +87,7 @@ export const solutionsMetadata: SolutionsMetadata = {
         "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
       variables: ["numFlatBSQ", "numPitchedBSQ", "numLayers"],
       generalVariables: ["numStories"],
-      costFormula({
-        numFlatBSQ = 0,
-        numPitchedBSQ = 0,
-        numLayers = 1,
-        numStories = 1,
-      }) {
+      costFormula({ numFlatBSQ = 0, numPitchedBSQ = 0, numLayers = 1 }) {
         const totalBSQ = numFlatBSQ + numPitchedBSQ;
         const baseCost =
           numFlatBSQ * pricesVariables.roof.BSQRedeckFlat +
@@ -103,7 +97,7 @@ export const solutionsMetadata: SolutionsMetadata = {
           pricesVariables.roof.dollarPerAdditionalLayer *
           numPitchedBSQ;
         const costAdditionalStories =
-          (numStories - 1) *
+          (currentProjectInfo.numStories - 1) *
           pricesVariables.roof.dollarPerAdditionalStory *
           totalBSQ;
         return baseCost + costAdditionalLayers + costAdditionalStories;
@@ -117,9 +111,10 @@ export const solutionsMetadata: SolutionsMetadata = {
         "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
       variables: ["numPitchedBSQ"],
       generalVariables: ["numStories"],
-      costFormula({ numPitchedBSQ = 0, numStories = 1 }) {
+      costFormula({ numPitchedBSQ = 0 }) {
         const additionalStoriesPricing =
-          (numStories - 1) * pricesVariables.roof.dollarPerAdditionalStory;
+          (currentProjectInfo.numStories - 1) *
+          pricesVariables.roof.dollarPerAdditionalStory;
         const baseCost =
           numPitchedBSQ *
           (pricesVariables.roof.BSQTileReset + additionalStoriesPricing);
@@ -240,6 +235,152 @@ export const solutionsMetadata: SolutionsMetadata = {
       },
     },
   ],
+  dryscaping: [
+    {
+      label: "Install Artificial",
+      accessor: "installArtificial",
+      description: "Install Artificial Grasssss",
+      imageUrl:
+        "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
+      variables: ["artificialSqFt"],
+      generalVariables: [],
+      costFormula({ artificialSqFt }) {
+        console.log({ artificialSqFt });
+        return 0;
+      },
+    },
+    {
+      label: "Install Gravel",
+      accessor: "installGravel",
+      description: "Install Gravel hereeee",
+      imageUrl:
+        "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
+      variables: ["gravelSqFt"],
+      generalVariables: [],
+      costFormula({ gravelSqFt }) {
+        console.log({ gravelSqFt });
+        return 0;
+      },
+    },
+    {
+      label: "Install Mulch",
+      accessor: "installMulch",
+      description: "Install Mulch sonnneee",
+      imageUrl:
+        "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
+      variables: ["mulchSqFt"],
+      generalVariables: [],
+      costFormula({ mulchSqFt }) {
+        console.log({ mulchSqFt });
+        return 0;
+      },
+    },
+    {
+      label: "Install Concrete",
+      accessor: "installConcrete",
+      description: "Install Concrete sstrong sonnneee",
+      imageUrl:
+        "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
+      variables: ["concreteSqFt"],
+      generalVariables: [],
+      costFormula({ concreteSqFt }) {
+        console.log({ concreteSqFt });
+        return 0;
+      },
+    },
+    {
+      label: "Remove and Replace Concrete",
+      accessor: "rnrConcrete",
+      description: "Remove and replace concrete boyyy",
+      imageUrl:
+        "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
+      variables: ["concreteSqFt"],
+      generalVariables: [],
+      costFormula({ concreteSqFt }) {
+        console.log({ concreteSqFt });
+        return 0;
+      },
+    },
+    {
+      label: "Install Pavers",
+      accessor: "installPavers",
+      description: "Install Pavers beautiful",
+      imageUrl:
+        "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
+      variables: ["paversSqFt"],
+      generalVariables: [],
+      costFormula({ paversSqFt }) {
+        console.log({ paversSqFt });
+        return 0;
+      },
+    },
+  ],
+  exteriorPaint: [
+    {
+      label: "Cool Life Paint",
+      accessor: "coolLifePaint",
+      description: "Paint your home",
+      imageUrl:
+        "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
+      variables: [],
+      generalVariables: [],
+      costFormula() {
+        return 0;
+      },
+    },
+    {
+      label: "Water Paint",
+      accessor: "waterPaint",
+      description: "Paint your home",
+      imageUrl:
+        "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
+      variables: [],
+      generalVariables: [],
+      costFormula() {
+        return 0;
+      },
+    },
+  ],
+  interiorPaint: [
+    {
+      label: "Partial interior paint",
+      accessor: "partialInteriorPaint",
+      description: "Paint a room or area",
+      imageUrl:
+        "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
+      variables: [],
+      generalVariables: [],
+      costFormula() {
+        return 0;
+      },
+    },
+    {
+      label: "Full interior repaint",
+      accessor: "fullInteriorPaint",
+      description: "Paint entire home interior",
+      imageUrl:
+        "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
+      variables: [],
+      generalVariables: [],
+      costFormula() {
+        return 0;
+      },
+    },
+  ],
+  electricals: [
+    {
+      label: "Main Panel Upgrade",
+      accessor: "mpu",
+      description: "Upgrade main panel",
+      imageUrl:
+        "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
+      variables: [],
+      generalVariables: [],
+      costFormula() {
+        return 0;
+      },
+    },
+  ],
 };
 
 export const solutionsUpgradesMap: Record<string, AllUpgradeKeys> = {};
@@ -249,86 +390,3 @@ Object.entries(solutionsMetadata).forEach(([key, value]) => {
     solutionsUpgradesMap[solution.accessor] = key as AllUpgradeKeys;
   });
 });
-
-// {
-//   upgradeAccessor: "dryscaping",
-//   solutions: [
-//     {
-//       label: "Install Artificial",
-//       accessor: "installArtificial",
-//       description: "Install Artificial Grasssss",
-//       imageUrl:
-//         "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
-//       costFormula() {},
-//     },
-//     {
-//       label: "Install Gravel",
-//       accessor: "installGravel",
-//       description: "Install Gravel hereeee",
-//       imageUrl:
-//         "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
-//       costFormula() {},
-//     },
-//     {
-//       label: "Install Mulch",
-//       accessor: "installMulch",
-//       description: "Install Mulch sonnneee",
-//       imageUrl:
-//         "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
-//       costFormula() {},
-//     },
-//     {
-//       label: "Install Concrete",
-//       accessor: "installConcrete",
-//       description: "Install Concrete sstrong sonnneee",
-//       imageUrl:
-//         "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
-//       costFormula() {},
-//     },
-//     {
-//       label: "Remove and Replace Concrete",
-//       accessor: "rnrConcrete",
-//       description: "Remove and replace concrete boyyy",
-//       imageUrl:
-//         "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
-//       costFormula() {},
-//     },
-//     {
-//       label: "Install Pavers",
-//       accessor: "installPavers",
-//       description: "Install Pavers beautiful",
-//       imageUrl:
-//         "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
-//       costFormula() {},
-//     },
-//   ],
-// },
-// {
-//   upgradeAccessor: "exteriorPaint",
-//   solutions: [
-//     {
-//       label: "Cool Life Paint",
-//       accessor: "coolLifePaint",
-//       description: "Paint your home",
-//       imageUrl:
-//         "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
-//       costFormula() {},
-//     },
-//     {
-//       label: "Water Paint",
-//       accessor: "waterPaint",
-//       description: "Paint your home",
-//       imageUrl:
-//         "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
-//       costFormula() {},
-//     },
-//   ],
-// },
-// {
-//   upgradeAccessor: "interiorPaint",
-//   solutions: [],
-// },
-// {
-//   upgradeAccessor: "electricals",
-//   solutions: [],
-// },

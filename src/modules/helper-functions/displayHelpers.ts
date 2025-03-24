@@ -14,10 +14,10 @@ export function getVariables(category: Upgrade | Solution) {
 }
 
 export function generateVariables(solution: Solution) {
-    return [
-      ...getVariables(solution).map((v) => ({
-        ...v,
-        value: v.defaultValue || 0,
-      })),
-    ];
-  }
+  return [
+    ...getVariables(solution).map((v) => ({
+      ...v,
+      value: v.defaultValue || 0,
+    })),
+  ];
+}

@@ -4,15 +4,18 @@ import { UpgradeFactory } from "../upgrades/UpgradeFactory";
 import { VariableFactory } from "../variables/VariableFactory";
 import { SolutionMetadata } from "./types";
 import { Upgrade } from "../upgrades/Upgrade";
+import { UpgradeVariablesAccessors } from "../variables/types";
 
 export class Solution implements BaseConstructionCategory {
   _accessor;
   variablesProvider;
   private _upgrade: Upgrade;
-  private _costFormula: (params: { [key: string]: number }) => number;
+  private _costFormula: (params: {
+    [key in UpgradeVariablesAccessors<Upgrade["_accessor"]>]: number;
+  }) => number;
   constructor(
     private _upgradeAccessor: AllUpgradeKeys,
-    private _metadata: SolutionMetadata
+    private _metadata: SolutionMetadata<Upgrade["_accessor"]>
   ) {
     this._accessor = _metadata.accessor;
     this._costFormula = _metadata.costFormula;
@@ -35,7 +38,9 @@ export class Solution implements BaseConstructionCategory {
     return this.variablesProvider.variables;
   }
 
-  calculateCost(params: { [key: string]: number }): number {
+  calculateCost(params: {
+    [key in UpgradeVariablesAccessors<Upgrade["_accessor"]>]: number;
+  }): number {
     return this._costFormula(params);
   }
 }
