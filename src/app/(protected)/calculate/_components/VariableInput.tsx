@@ -1,5 +1,5 @@
 import { Variable, VariableWithValue } from "@/modules/variables/types";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 
 interface VariableInputProps {
   variable: Variable;
@@ -12,17 +12,16 @@ export const VariableInput = ({
 }: VariableInputProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const updateVariable = (
+  function updateVariable(
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    console.log(e.target.value);
+  ) {
     const updatedVariable = { ...variable, value: e.target.value };
     setVariables((variables) =>
       variables.map((v) =>
         v.accessor === variable.accessor ? updatedVariable : v
       )
     );
-  };
+  }
 
   return (
     <div className="flex justify-between w-full items-center">

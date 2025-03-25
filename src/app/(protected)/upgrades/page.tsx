@@ -2,14 +2,17 @@
 
 import { Upgrade } from "@/models/upgrades";
 import UpgradeCard from "./_components/UpgradeCard";
-import fetchUpgrades from "./lib/fetchUpgrades";
+import { getCacheData } from "../../../lib/data/getCachedData";
 import { useEffect, useState } from "react";
+import { fetchUpgrades } from "@/lib/data/fetchUpgrades";
 
 export default function UpgradesPage() {
   const [upgrades, setUpgrades] = useState<Upgrade[]>([]);
 
   useEffect(() => {
-    fetchUpgrades({ seconds: 20 }).then((upgrades) => setUpgrades(upgrades));
+    getCacheData("upgrades", fetchUpgrades).then((upgrades) =>
+      setUpgrades(upgrades)
+    );
   }, []);
 
   if (!upgrades) {

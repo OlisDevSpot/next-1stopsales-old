@@ -1,23 +1,20 @@
 import { solutionsMetadata } from "../solutions/solutions.config";
-import { AllUpgradeKeys } from "../upgrades/types";
-import { upgradesMetadata } from "../upgrades/upgrades.config";
+import { UpgradeAccessor } from "../upgrades/types";
 import { Variable } from "./types";
 import { pricesVariables, upgradeVariables } from "./variables.config";
 
 export class VariableFactory {
   private _variables: Variable[] = [];
   constructor(
-    private upgradeAccessor: AllUpgradeKeys,
+    private upgradeAccessor: UpgradeAccessor,
     private solutionAccessor?: string
-  ) {}
-
-  get variables(): Variable[] {
-    let variables: Variable[] = [];
+  ) {
     if (!this.solutionAccessor) {
-      variables =
+      const uv =
         upgradeVariables[
           this.upgradeAccessor as keyof typeof upgradeVariables
         ] || [];
+      this._variables = uv;
     } else if (this.solutionAccessor) {
       const variablesOfUpgrade =
         upgradeVariables[this.upgradeAccessor as keyof typeof upgradeVariables];
@@ -28,12 +25,15 @@ export class VariableFactory {
       variablesOfSolution.forEach((vos) => {
         variablesOfUpgrade.forEach((vou) => {
           if (vou.accessor === vos) {
-            variables.push(vou);
+            this._variables.push(vou);
           }
         });
       });
     }
-    return variables;
+  }
+
+  get variables(): Variable[] {
+    return this._variables;
   }
 
   get allPrices() {
@@ -41,14 +41,5 @@ export class VariableFactory {
       pricesVariables[this.upgradeAccessor as keyof typeof pricesVariables];
     if (!upgradePrices) throw new Error("no relevant prices!");
     return upgradePrices;
-  }
-
-  private get accessorType(): "upgrade" | "solution" {
-    if (
-      upgradesMetadata.map((u) => u.accessor).includes(this.upgradeAccessor)
-    ) {
-      return "upgrade";
-    }
-    return "solution";
   }
 }

@@ -2,101 +2,60 @@
 
 import { useEffect, useState } from "react";
 
-import {
-  generateVariables,
-  getCategoryDetail,
-  getVariables,
-} from "@/modules/helper-functions/displayHelpers";
+import { generateVariables } from "@/modules/helper-functions/displayHelpers";
+import { DEFAULTS } from "./_config/defaults";
 import { type Upgrade } from "@/modules/upgrades/Upgrade";
-import { type AllUpgradeKeys } from "@/modules/upgrades/types";
 import { type Solution } from "@/modules/solutions/Solution";
 import { type VariableWithValue } from "@/modules/variables/types";
 
-import { createUpgrade } from "@/modules/upgrades/UpgradeFactory";
-import { upgradesMetadata } from "@/modules/upgrades/upgrades.config";
-import { createSolution } from "@/modules/solutions/SolutionFactory";
-import { solutionsMetadata } from "@/modules/solutions/solutions.config";
+import { SolutionCard } from "./_components/SolutionCard";
+import { UpgradeCard } from "./_components/UpgradeCard";
+import { ProjectTotalsCard } from "./_components/ProjectTotalsCard";
+import { Project } from "@/modules/projects/Project";
 
-import { CategoryCard } from "./_components/CategoryCard";
-import { Output } from "./_components/Output";
-
-const default_upgrade = createUpgrade("solar");
-const default_solution = createSolution(default_upgrade.solutions[0].accessor);
-const default_variables = [
-  ...getVariables(default_solution).map((v) => ({
-    ...v,
-    value: v.defaultValue || 0,
-  })),
-];
-
-const TestPage = () => {
-  const [selectedUpgrade, setSelectedUpgrade] =
-    useState<Upgrade>(default_upgrade);
-  const [selectedSolution, setSelectedSolution] =
-    useState<Solution>(default_solution);
-  const [variables, setVariables] =
-    useState<VariableWithValue[]>(default_variables);
+const CalculatePage = () => {
+  const [project] = useState<Project>(new Project());
+  const [selectedUpgrade, setSelectedUpgrade] = useState<Upgrade>(
+    DEFAULTS.default_upgrade
+  );
+  const [selectedSolution, setSelectedSolution] = useState<Solution | null>(
+    null
+  );
+  const [variables, setVariables] = useState<VariableWithValue[]>(
+    DEFAULTS.default_variables
+  );
+  const [projectPrice, setProjectPrice] = useState(0);
 
   useEffect(() => {
+    if (!selectedSolution) return;
     setVariables(generateVariables(selectedSolution));
   }, [selectedSolution]);
 
-  function updateUpgrade(upgrade: AllUpgradeKeys) {
-    const newUpgrade = createUpgrade(upgrade);
-    const newSolution = createSolution(newUpgrade.solutions[0].accessor);
-    const newVariables = generateVariables(newSolution);
-    setSelectedUpgrade(newUpgrade);
-    setSelectedSolution(newSolution);
-    setVariables(newVariables);
-  }
-
   return (
-    <div className="text-base w-full space-y-4">
-      <div className="flex gap-2">
-        <select
-          value={getCategoryDetail(selectedUpgrade.metadata, "accessor")}
-          onChange={(e) => {
-            updateUpgrade(e.target.value as AllUpgradeKeys);
-          }}
-        >
-          {upgradesMetadata.map((upgrade) => (
-            <option key={upgrade.accessor} value={upgrade.accessor}>
-              {upgrade.label}
-            </option>
-          ))}
-        </select>
-        <select
-          value={getCategoryDetail(selectedSolution.metadata, "accessor")}
-          onChange={(e) => {
-            setSelectedSolution(
-              createSolution(
-                selectedUpgrade.solutions.find(
-                  (s) => s.accessor === e.target.value
-                )!.accessor
-              )
-            );
-          }}
-        >
-          {solutionsMetadata[selectedUpgrade.metadata.accessor]!.map(
-            (solution) => (
-              <option key={solution.accessor} value={solution.accessor}>
-                {solution.label}
-              </option>
-            )
-          )}
-        </select>
-      </div>
-      <div className="flex gap-4 w-full">
-        <CategoryCard category={selectedUpgrade} variables={variables} />
-        <CategoryCard
-          category={selectedSolution}
+    <div className="text-base w-full space-y-4 md:h-full">
+      <div className="flex flex-col md:flex-row gap-4 w-full h-full">
+        <UpgradeCard
+          curUpgrade={selectedUpgrade}
+          curSolution={selectedSolution}
+          setSelectedUpgrade={setSelectedUpgrade}
+          setSelectedSolution={setSelectedSolution}
+          setVariables={setVariables}
+        />
+        <SolutionCard
+          project={project}
+          setProjectPrice={setProjectPrice}
+          solution={selectedSolution}
           variables={variables}
           setVariables={setVariables}
         />
-        <Output solution={selectedSolution} variables={variables} />
+        <ProjectTotalsCard
+          project={project}
+          projectPrice={projectPrice}
+          setProjectPrice={setProjectPrice}
+        />
       </div>
     </div>
   );
 };
 
-export default TestPage;
+export default CalculatePage;

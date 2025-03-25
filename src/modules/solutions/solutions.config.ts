@@ -1,6 +1,6 @@
 import { SolutionsMetadata } from "./types";
 import { pricesVariables } from "../variables/variables.config";
-import { AllUpgradeKeys } from "../upgrades/types";
+import { UpgradeAccessor } from "../upgrades/types";
 
 const currentProjectInfo = {
   roofType: "shingle",
@@ -245,8 +245,9 @@ export const solutionsMetadata: SolutionsMetadata = {
       variables: ["artificialSqFt"],
       generalVariables: [],
       costFormula({ artificialSqFt }) {
-        console.log({ artificialSqFt });
-        return 0;
+        return (
+          artificialSqFt * pricesVariables.dryscaping.dollarPerSqFtArtificial
+        );
       },
     },
     {
@@ -258,8 +259,7 @@ export const solutionsMetadata: SolutionsMetadata = {
       variables: ["gravelSqFt"],
       generalVariables: [],
       costFormula({ gravelSqFt }) {
-        console.log({ gravelSqFt });
-        return 0;
+        return gravelSqFt * pricesVariables.dryscaping.dollarPerSqFtGravel;
       },
     },
     {
@@ -383,10 +383,10 @@ export const solutionsMetadata: SolutionsMetadata = {
   ],
 };
 
-export const solutionsUpgradesMap: Record<string, AllUpgradeKeys> = {};
+export const solutionsUpgradesMap: Record<string, UpgradeAccessor> = {};
 
 Object.entries(solutionsMetadata).forEach(([key, value]) => {
   value.forEach((solution) => {
-    solutionsUpgradesMap[solution.accessor] = key as AllUpgradeKeys;
+    solutionsUpgradesMap[solution.accessor] = key as UpgradeAccessor;
   });
 });

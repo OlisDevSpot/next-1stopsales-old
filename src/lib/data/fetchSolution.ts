@@ -1,5 +1,3 @@
-import fetchSolutionMongo from "./fetchSolutionMongo";
-
 export default async function fetchSolution(
   solutionName: string,
   { seconds = 5 }: { seconds?: number }
@@ -20,4 +18,12 @@ export default async function fetchSolution(
     );
     return data;
   }
+}
+
+export async function fetchSolutionMongo(solutionName: string) {
+  const response = await fetch(
+    `http://localhost:3000/api/solutions/${solutionName}`
+  );
+  const solution = await response.json();
+  return solution;
 }

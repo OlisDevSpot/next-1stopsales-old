@@ -2,7 +2,7 @@
 
 import { Solution } from "@/models/solutions";
 import { useEffect, useState } from "react";
-import fetchSolution from "../../lib/fetchSolution";
+import fetchSolution from "../../../../../lib/data/fetchSolution";
 import { ArrowLeftCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";

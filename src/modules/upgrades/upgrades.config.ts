@@ -2,7 +2,7 @@ export const upgradesMetadata = [
   {
     accessor: "solar",
     label: "Solar",
-    description: "Install a new solar system",
+    description: "Sun is shining everyday",
     imageUrl:
       "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
     extent: "home",

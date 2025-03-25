@@ -68,6 +68,7 @@ export const upgradeVariables = {
       accessor: "numPitchedBSQ",
       label: "Number of pitched BSQ",
       type: "number",
+      defaultValue: 0,
     },
     {
       accessor: "numLayers",
@@ -180,7 +181,7 @@ export const upgradeVariables = {
     },
     {
       accessor: "gravelSqFt",
-      label: "Square feet of gravellllll",
+      label: "Square feet of gravel",
       type: "number",
     },
     {

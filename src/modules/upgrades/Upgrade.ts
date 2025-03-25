@@ -1,17 +1,14 @@
-import { AllUpgradeKeys, UpgradeMetadata } from "./types";
-import { solutionsMetadata } from "../solutions/solutions.config";
+import { UpgradeMetadata } from "./types";
 import { VariableFactory } from "../variables/VariableFactory";
-import { BaseConstructionCategory } from "@/types/global";
-import { upgradeVariables } from "../variables/variables.config";
-import { Variable } from "../variables/types";
+import { SolutionFactory } from "../solutions/SolutionFactory";
 
-export class Upgrade implements BaseConstructionCategory<AllUpgradeKeys> {
+export class Upgrade {
   _accessor;
+  solutionsProvider;
   variablesProvider;
-  _variables: Variable[];
   constructor(private _metadata: UpgradeMetadata) {
     this._accessor = _metadata.accessor;
-    this._variables = upgradeVariables[this._accessor];
+    this.solutionsProvider = new SolutionFactory(this._accessor);
     this.variablesProvider = new VariableFactory(this._accessor);
   }
 
@@ -28,8 +25,10 @@ export class Upgrade implements BaseConstructionCategory<AllUpgradeKeys> {
   }
 
   get solutions() {
-    const solutionsOfUpgrade = solutionsMetadata[this._accessor];
-    if (!solutionsOfUpgrade) throw new Error("Upgrade not found");
-    return solutionsOfUpgrade;
+    return this.solutionsProvider.solutions;
+  }
+
+  createSolution(solutionAccessor: string) {
+    return this.solutionsProvider.createSolution(solutionAccessor);
   }
 }

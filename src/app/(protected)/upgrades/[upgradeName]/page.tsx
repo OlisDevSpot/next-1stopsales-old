@@ -3,10 +3,11 @@
 import SolutionCard from "../_components/SolutionCard";
 import { ArrowLeftCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
-import fetchSolutions from "../lib/fetchSolutions";
+import { fetchSolutions } from "@/lib/data/fetchSolutions";
 import { useEffect, useState } from "react";
 import { Solution } from "@/models/solutions";
 import { Upgrade } from "@/models/upgrades";
+import { getCacheData } from "@/lib/data/getCachedData";
 
 export default function UpgradePage({
   params,
@@ -19,15 +20,13 @@ export default function UpgradePage({
   const { upgradeName } = params;
 
   useEffect(() => {
-    fetchSolutions(upgradeName, { seconds: 20 }).then((data) => {
-      setUpgrade(data.upgrade);
-      setSolutions(data.solutions);
+    getCacheData(`${upgradeName}-solutions`, () =>
+      fetchSolutions(upgradeName)
+    ).then((solutionsOfUpgrade) => {
+      setUpgrade(solutionsOfUpgrade.upgrade);
+      setSolutions(solutionsOfUpgrade.solutions);
     });
   }, [upgradeName]);
-  // const upgrade = useQuery(api.upgrades.getSingleUpgrade, { upgradeName });
-  // const solutions = useQuery(api.solutions.getSolutionsOfUpgrade, {
-  //   upgradeName,
-  // });
 
   const handleClick = (solutionName: string) => {
     router.push(`/upgrades/${upgradeName}/${solutionName}`);
