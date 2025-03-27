@@ -35,10 +35,12 @@ export const ProjectTotalsCard = ({
                 }}
               />
               <p className="text-xs text-slate-600">
-                {solution.upgrade._accessor}
+                {solution.upgrade.accessor}
               </p>
               <div className="flex gap-2 justify-between">
-                <h5>{solution.metadata.label}</h5>
+                <div className="flex flex-col gap-2">
+                  <h5>{solution.metadata.label}</h5>
+                </div>
                 <p>{convertToDollars(solution.price)}</p>
               </div>
             </div>

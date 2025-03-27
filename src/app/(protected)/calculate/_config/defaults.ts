@@ -1,4 +1,3 @@
-import { getVariables } from "@/modules/helper-functions/displayHelpers";
 import { createUpgrade } from "@/modules/upgrades/UpgradeFactory";
 
 const default_upgrade_accessor = "solar";
@@ -8,7 +7,7 @@ const default_solution = default_upgrade.solutionsProvider.createSolution(
   default_solution_accessor
 );
 const default_variables = [
-  ...getVariables(default_solution).map((v) => ({
+  ...default_solution.variables.map((v) => ({
     ...v,
     value: v.defaultValue || 0,
   })),

@@ -1,19 +1,20 @@
 import { UpgradeAccessor } from "../upgrades/types";
+import { Upgrade } from "../upgrades/Upgrade";
 import { Solution } from "./Solution";
 import { solutionsMetadata } from "./solutions.config";
 
 export class SolutionFactory {
-  constructor(private _upgradeAccessor: UpgradeAccessor) {}
+  constructor(private _upgrade: Upgrade) {}
 
   public createSolution(solutionAccessor: string): Solution {
-    const solutions = solutionsMetadata[this._upgradeAccessor] || [];
-    const solution = solutions.find((s) => s.accessor === solutionAccessor);
-    if (!solution) throw new Error("Solution not found");
-    return new Solution(this._upgradeAccessor, solution);
+    const solutions = solutionsMetadata[this._upgrade.accessor] || [];
+    const solutionMetadata = solutions.find((s) => s.accessor === solutionAccessor);
+    if (!solutionMetadata) throw new Error("Solution not found");
+    return new Solution(this._upgrade, solutionMetadata);
   }
 
   public get solutions() {
-    const solutionsOfUpgrade = solutionsMetadata[this._upgradeAccessor];
+    const solutionsOfUpgrade = solutionsMetadata[this._upgrade.accessor];
     if (!solutionsOfUpgrade) throw new Error("Upgrade not found");
     return solutionsOfUpgrade;
   }

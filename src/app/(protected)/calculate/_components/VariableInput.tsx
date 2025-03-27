@@ -3,12 +3,12 @@ import { useRef } from "react";
 
 interface VariableInputProps {
   variable: Variable;
-  setVariables: React.Dispatch<React.SetStateAction<VariableWithValue[]>>;
+  setTempVariables: React.Dispatch<React.SetStateAction<VariableWithValue[]>>;
 }
 
 export const VariableInput = ({
   variable,
-  setVariables,
+  setTempVariables,
 }: VariableInputProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -16,7 +16,7 @@ export const VariableInput = ({
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) {
     const updatedVariable = { ...variable, value: e.target.value };
-    setVariables((variables) =>
+    setTempVariables((variables) =>
       variables.map((v) =>
         v.accessor === variable.accessor ? updatedVariable : v
       )

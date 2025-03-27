@@ -26,7 +26,7 @@ export const solutionsMetadata: SolutionsMetadata = {
       accessor: "rnrPanels",
       description: "Remove and reinstall existing solar system",
       imageUrl:
-        "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
+        "https://solarfixaz.com/core/uploads/2023/11/Residential-Solar-Panels.6116fa95c5e8f0.47033230-1024x536.jpg",
       variables: ["numPanels"],
       generalVariables: ["existingRoofType"],
       costFormula({ numPanels = 0 }) {
@@ -38,7 +38,7 @@ export const solutionsMetadata: SolutionsMetadata = {
       accessor: "installBattery",
       description: "Install a new battery",
       imageUrl:
-        "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
+        "https://solaroptimum.com/wp-content/uploads/2022/01/SO_enphase_horiz_4-1.jpeg",
       variables: ["numBatteries", "kWhPerBattery"],
       generalVariables: [],
       costFormula({ numBatteries = 0, kWhPerBattery = 5 }) {
@@ -52,11 +52,33 @@ export const solutionsMetadata: SolutionsMetadata = {
   ],
   roof: [
     {
+      label: "Roof Overlay",
+      accessor: "overlay",
+      description: "Overlay over existing roofing",
+      imageUrl:
+        "https://s42814.pcdn.co/wp-content/uploads/2020/01/Roofing_iStock-934626558.0-1-scaled.jpg.optimal.jpg",
+      variables: ["numFlatBSQ", "numPitchedBSQ"],
+      generalVariables: ["numStories"],
+      costFormula({ numFlatBSQ = 0, numPitchedBSQ = 0 }) {
+        const flatCost = numFlatBSQ * pricesVariables.roof.BSQOverlayFlat;
+        const pitchedCost =
+          numPitchedBSQ * pricesVariables.roof.BSQOverlayPitched;
+
+        const totalBSQ = numFlatBSQ + numPitchedBSQ;
+        const costAdditionalStories =
+          (currentProjectInfo.numStories - 1) *
+          pricesVariables.roof.dollarPerAdditionalStory *
+          totalBSQ;
+
+        return flatCost + pitchedCost + costAdditionalStories;
+      },
+    },
+    {
       label: "Roof Tear-off",
       accessor: "tearOff",
       description: "Replace existing roofing",
       imageUrl:
-        "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
+        "https://s42814.pcdn.co/wp-content/uploads/2020/01/Roofing_iStock-934626558.0-1-scaled.jpg.optimal.jpg",
       variables: ["numFlatBSQ", "numPitchedBSQ", "numLayers"],
       generalVariables: ["numStories", "existingRoofType"],
       costFormula({ numFlatBSQ = 0, numPitchedBSQ = 0, numLayers = 1 }) {
@@ -84,7 +106,7 @@ export const solutionsMetadata: SolutionsMetadata = {
       accessor: "redeck",
       description: "Replace entire existing roofing",
       imageUrl:
-        "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
+        "https://www.contractortalk.com/attachments/2-2_plywoodoverskipsheathing-jpg.134649/",
       variables: ["numFlatBSQ", "numPitchedBSQ", "numLayers"],
       generalVariables: ["numStories"],
       costFormula({ numFlatBSQ = 0, numPitchedBSQ = 0, numLayers = 1 }) {
@@ -108,7 +130,7 @@ export const solutionsMetadata: SolutionsMetadata = {
       accessor: "tileReset",
       description: "Replace entire existing tile roofing",
       imageUrl:
-        "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
+        "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/11/featured-tile-roof.jpeg.jpg",
       variables: ["numPitchedBSQ"],
       generalVariables: ["numStories"],
       costFormula({ numPitchedBSQ = 0 }) {
@@ -128,7 +150,7 @@ export const solutionsMetadata: SolutionsMetadata = {
       accessor: "replaceWindows",
       description: "Replace existing windows",
       imageUrl:
-        "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
+        "https://www.windowwire.com/cdn/shop/products/Window_Wire_0010_BA_W_No_Grids_bb520116-c33c-40f7-b355-c6b54903912a_1200x1200.jpg?v=1588609566",
       variables: ["numLargeWindows", "numSmallWindows"],
       generalVariables: [],
       costFormula({ numLargeWindows = 0, numSmallWindows = 0 }) {
@@ -143,7 +165,7 @@ export const solutionsMetadata: SolutionsMetadata = {
       accessor: "rnrSliders",
       description: "Replace existing window sliders",
       imageUrl:
-        "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
+        "https://bearwindows.com/wp-content/uploads/2020/05/vinyl-french1.jpg",
       variables: ["numStandardSliders", "numSpecialSliders"],
       generalVariables: [],
       costFormula({ numStandardSliders = 0, numSpecialSliders = 0 }) {
@@ -173,7 +195,7 @@ export const solutionsMetadata: SolutionsMetadata = {
       accessor: "topOffAttic",
       description: "Top-off attic insulation",
       imageUrl:
-        "https://www.contractortalk.com/attachments/2-2_plywoodoverskipsheathing-jpg.134649/",
+        "https://braxroofing.com/wp-content/uploads/2022/10/roofer-installing-an-attic-insulation.jpg",
       variables: ["atticSqFt"],
       generalVariables: [],
       costFormula({ atticSqFt = 0 }) {
@@ -187,7 +209,7 @@ export const solutionsMetadata: SolutionsMetadata = {
       accessor: "rnrSplitSystem",
       description: "Remove and replace a whole-house split system",
       imageUrl:
-        "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
+        "https://www.hatchyourhome.com/wp-content/uploads/2019/12/attic-air-conditioner-attic-air-conditioning-units-attic-ac-unit-6-photos-for-heating-cooling-attic-ac-unit-price-attic-air-conditioning-attic-air-conditioning-system-cost-min.jpg",
       variables: ["systemTonnage"],
       generalVariables: ["numStories"],
       costFormula({ systemTonnage = 3 }) {
@@ -241,7 +263,7 @@ export const solutionsMetadata: SolutionsMetadata = {
       accessor: "installArtificial",
       description: "Install Artificial Grasssss",
       imageUrl:
-        "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
+        "https://miro.medium.com/v2/resize:fit:736/1*G0SHQeORsSRDJIpErgGd6Q.jpeg",
       variables: ["artificialSqFt"],
       generalVariables: [],
       costFormula({ artificialSqFt }) {
@@ -306,7 +328,7 @@ export const solutionsMetadata: SolutionsMetadata = {
       accessor: "installPavers",
       description: "Install Pavers beautiful",
       imageUrl:
-        "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
+        "https://cfrouting.zoeysite.com/cdn-cgi/image/format=auto,fit=scale-down,quality=70/https://s3.amazonaws.com/zcom-media/sites/a0iE000000Hu85dIAB/media/catalog/product/u/s/uspaverscape-royal-castlescape-pavers-a.jpg",
       variables: ["paversSqFt"],
       generalVariables: [],
       costFormula({ paversSqFt }) {
@@ -321,7 +343,7 @@ export const solutionsMetadata: SolutionsMetadata = {
       accessor: "coolLifePaint",
       description: "Paint your home",
       imageUrl:
-        "https://t4.ftcdn.net/jpg/05/19/44/59/360_F_519445978_PEPYf1rgopUdcN31HobzIVv8RAaoqNRE.jpg",
+        "https://contentgrid.homedepot-static.com/hdus/en_US/DTCCOMNEW/Articles/painting-the-exterior-of-our-house-with-the-projectcolor-app-hero.jpg",
       variables: [],
       generalVariables: [],
       costFormula() {

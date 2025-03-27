@@ -2,7 +2,7 @@ import { Upgrade } from "@/modules/upgrades/Upgrade";
 import { solutionsMetadata } from "@/modules/solutions/solutions.config";
 import { UpgradeAccessor } from "@/modules/upgrades/types";
 import { createUpgrade } from "@/modules/upgrades/UpgradeFactory";
-import { Solution } from "@/modules/solutions/Solution";
+import { type Solution } from "@/modules/solutions/Solution";
 import { VariableWithValue } from "@/modules/variables/types";
 import { upgradesMetadata } from "@/modules/upgrades/upgrades.config";
 import { cn } from "@/lib/utils";
@@ -57,6 +57,8 @@ export const UpgradeCard = ({
               key={solution.accessor}
               style={{
                 background: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url('${solution.imageUrl}')`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
               }}
               onClick={() => {
                 if (curSolution?.accessor === solution.accessor) return;

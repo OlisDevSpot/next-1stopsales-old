@@ -1,3 +1,4 @@
+import { UpgradeAccessor } from "../upgrades/types";
 import { AllGeneralVariablesKeys, Variables } from "./types";
 
 export const generalVariables: Variables<AllGeneralVariablesKeys> = {
@@ -26,7 +27,7 @@ export const generalVariables: Variables<AllGeneralVariablesKeys> = {
   ],
 };
 
-export const upgradeVariables = {
+export const upgradeVariables: Variables<UpgradeAccessor> = {
   solar: [
     {
       accessor: "numPanels",
@@ -220,7 +221,8 @@ export const pricesVariables = {
     BSQRedeckFlat: 650,
     BSQRedeckPitched: 700,
     BSQTileReset: 580,
-    BSQOverlay: 420,
+    BSQOverlayPitched: 420,
+    BSQOverlayFlat: 420,
     dollarPerAdditionalStory: 25,
     dollarPerAdditionalLayer: 25,
     permitFee: 250,

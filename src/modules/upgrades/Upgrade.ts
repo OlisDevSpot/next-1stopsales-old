@@ -1,15 +1,18 @@
 import { UpgradeMetadata } from "./types";
 import { VariableFactory } from "../variables/VariableFactory";
 import { SolutionFactory } from "../solutions/SolutionFactory";
-
 export class Upgrade {
-  _accessor;
-  solutionsProvider;
-  variablesProvider;
+  private _accessor;
+  private _solutionsProvider;
+  private _variablesProvider;
   constructor(private _metadata: UpgradeMetadata) {
     this._accessor = _metadata.accessor;
-    this.solutionsProvider = new SolutionFactory(this._accessor);
-    this.variablesProvider = new VariableFactory(this._accessor);
+    this._solutionsProvider = new SolutionFactory(this);
+    this._variablesProvider = new VariableFactory(this._accessor);
+  }
+
+  get accessor() {
+    return this._accessor;
   }
 
   get metadata() {
@@ -17,18 +20,26 @@ export class Upgrade {
   }
 
   get variables() {
-    return this.variablesProvider.variables;
+    return this._variablesProvider.variables;
   }
 
   get prices() {
-    return this.variablesProvider.allPrices;
+    return this._variablesProvider.allPrices;
   }
 
   get solutions() {
-    return this.solutionsProvider.solutions;
+    return this._solutionsProvider.solutions;
+  }
+
+  get solutionsProvider() {
+    return this._solutionsProvider;
+  }
+
+  get variablesProvider() {
+    return this._variablesProvider;
   }
 
   createSolution(solutionAccessor: string) {
-    return this.solutionsProvider.createSolution(solutionAccessor);
+    return this._solutionsProvider.createSolution(solutionAccessor);
   }
 }

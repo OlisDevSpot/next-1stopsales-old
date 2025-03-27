@@ -1,28 +1,24 @@
-import { UpgradeAccessor } from "../upgrades/types";
-import { UpgradeFactory } from "../upgrades/UpgradeFactory";
-import { VariableFactory } from "../variables/VariableFactory";
 import { SolutionMetadata } from "./types";
 import { Upgrade } from "../upgrades/Upgrade";
-import { UpgradeVariablesAccessors } from "../variables/types";
+import { UpgradeVariablesAccessors, Variable } from "../variables/types";
 
 export class Solution {
-  _accessor;
+  private _accessor;
   private _cost: number = 0;
-  private variablesProvider;
-  private _upgrade: Upgrade;
+  private _variables: Variable[] = [];
   private _costFormula: (params: {
     [key in UpgradeVariablesAccessors<Upgrade["_accessor"]>]: number;
   }) => number;
   constructor(
-    private _upgradeAccessor: UpgradeAccessor,
+    private _upgrade: Upgrade,
     private _metadata: SolutionMetadata<Upgrade["_accessor"]>
   ) {
     this._accessor = _metadata.accessor;
     this._costFormula = _metadata.costFormula;
-    this._upgrade = UpgradeFactory.createUpgrade(this._upgradeAccessor);
-    this.variablesProvider = new VariableFactory(
-      this._upgradeAccessor,
-      this._accessor
+
+    const solutionVariables = this.metadata.variables || [];
+    this._variables = this.variablesProvider.variables.filter((v) =>
+      this.metadata.variables.includes(v.accessor)
     );
   }
 
@@ -39,7 +35,14 @@ export class Solution {
   }
 
   get variables() {
-    return this.variablesProvider.variables;
+    //       variablesOfSolution.forEach((vos) => {
+    //         variablesOfUpgrade.forEach((vou) => {
+    //           if (vou.accessor === vos) {
+    //             this._variables.push(vou);
+    //           }
+    //         });
+    //       });
+    return this._variables;
   }
 
   get cost() {
@@ -54,8 +57,8 @@ export class Solution {
     return this._cost * 2.5;
   }
 
-  get variableProvider() {
-    return this.variablesProvider;
+  get variablesProvider() {
+    return this.upgrade.variablesProvider;
   }
 
   calculateCost(params: {
