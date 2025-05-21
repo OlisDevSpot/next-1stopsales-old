@@ -3,10 +3,11 @@
 import SolutionCard from "../_components/SolutionCard";
 import { ArrowLeftCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
-import fetchSolutions from "../lib/fetchSolutions";
+import { fetchSolutions } from "@/lib/data/fetchSolutions";
 import { useEffect, useState } from "react";
 import { Solution } from "@/models/solutions";
 import { Upgrade } from "@/models/upgrades";
+import { getCacheData } from "@/lib/data/getCachedData";
 
 export default function UpgradePage({
   params,
@@ -19,16 +20,17 @@ export default function UpgradePage({
   const { upgradeName } = params;
 
   useEffect(() => {
-    fetchSolutions(upgradeName).then((data) => {
-      console.log({ data });
-      setUpgrade(data.upgrade);
-      setSolutions(data.solutions);
+    getCacheData(`${upgradeName}-solutions`, () =>
+      fetchSolutions(upgradeName)
+    ).then((solutionsOfUpgrade) => {
+      setUpgrade(solutionsOfUpgrade.upgrade);
+      setSolutions(solutionsOfUpgrade.solutions);
     });
   }, [upgradeName]);
-  // const upgrade = useQuery(api.upgrades.getSingleUpgrade, { upgradeName });
-  // const solutions = useQuery(api.solutions.getSolutionsOfUpgrade, {
-  //   upgradeName,
-  // });
+
+  const handleClick = (solutionName: string) => {
+    router.push(`/upgrades/${upgradeName}/${solutionName}`);
+  };
 
   return (
     <div className="w-full h-full flex flex-col">
@@ -43,7 +45,11 @@ export default function UpgradePage({
       <div className="grid grid-cols-3 gap-4 flex-grow">
         {solutions?.map((solution) => {
           return (
-            <SolutionCard solution={solution} key={String(solution._id)} />
+            <SolutionCard
+              solution={solution}
+              key={String(solution._id)}
+              onClick={() => handleClick(solution.name)}
+            />
           );
         })}
       </div>

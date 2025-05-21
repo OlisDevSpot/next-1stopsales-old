@@ -1,10 +1,11 @@
 import { Solution } from "@/models/solutions";
 
 interface SolutionCardProps {
-  solution: Solution
+  solution: Solution;
+  onClick: () => void;
 }
 
-export default function SolutionCard({ solution }: SolutionCardProps) {
+export default function SolutionCard({ solution, onClick }: SolutionCardProps) {
   return (
     <div
       key={String(solution._id)}
@@ -12,6 +13,7 @@ export default function SolutionCard({ solution }: SolutionCardProps) {
       style={{
         backgroundImage: `url('${solution.image_url}')`,
       }}
+      onClick={onClick}
     >
       {/* OVERLAY */}
       <div className="group w-full h-full bg-black/70 rounded-lg p-4 cursor-pointer hover:bg-black/25 transition">
